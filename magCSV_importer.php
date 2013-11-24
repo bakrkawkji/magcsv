@@ -39,11 +39,11 @@
 	/*
 	* @configuration
 	*/
-	$magento_path = 'app/Mage.php';
-	$simpleExcel_path = 'SimpleExcel/SimpleExcel.php';
+	$magento_path = 'app/Mage.php'; 									   // system path to Mage.php
+	$simpleExcel_path = 'SimpleExcel/SimpleExcel.php'; 					   // system path to SimpleExcel
 	
-	$attributesCsvFile = 	 'var/import/YOUR_ATTRIBUTES_FILE.csv';  		   // system path to your attributes file, ex: 'var/import/MagCSV-attributes-20131110082100-6428.csv'
-	$attributesSetsCsvFile = 'var/import/YOUR_ATTRIBUTES_SETS_FILE.csv';  // system path to your attributes sets file
+	$attributesCsvFile = 	 'var/import/YOUR_ATTRIBUTES_FILE.csv';  	   // system path to your attributes file, ex: 'var/import/MagCSV-attributes-20131110082100-6428.csv'
+	$attributesSetsCsvFile = 'var/import/YOUR_ATTRIBUTES_SETS_FILE.csv';   // system path to your attributes sets file
 	
 	$do = array(
 		'CreateAttibutes' => true,			// set false to turn off attributes creation
@@ -235,9 +235,6 @@ function attributeExists($arg_attribute){
 	return false;
 }
 
-/**
-* @param $data array('code' => 'new_set_code', 'name' => 'new_set_name')
-*/
 function createAttrSet($data){
 	$entityTypeID = Mage::getModel('catalog/product')->getResource()->getTypeId();
 	$newAttributeSet = Mage::getModel('eav/entity_attribute_set');
@@ -400,7 +397,6 @@ function doAddAttrSetAttribute($fileNamePath){
 			
 			foreach($attributes as $attrId => $attrCode){
 				addAttrSetAttribute($attrCode, $row[0]);
-				//echo  $row[0].' '.$attrCode.' ';
 			}
 		}
 	} catch (Exception $e) {
@@ -410,7 +406,7 @@ function doAddAttrSetAttribute($fileNamePath){
 //========= functions =========
 
 
-// CREATE ATTRIBUTES FIRST, THEN ADD ATTRIBUTE OPTIONS, THEN CREATE ATTRIBUTE SETS
+// CREATE ATTRIBUTES FIRST, THEN ADD ATTRIBUTE OPTIONS, THEN CREATE ATTRIBUTE SETS, THEN ADD ATTRIBUTE SETS ATTRIBTUES!
 
 if($do['CreateAttibutes']){
 	doCreateAttibutes($attributesCsvFile);
